@@ -82,6 +82,7 @@ bool SystemProperties::imageFileCacheConvertAstc_ = false;
 int32_t SystemProperties::imageFileCacheConvertAstcThreshold_ = 2;
 std::atomic<bool> SystemProperties::traceInputEventEnable_(false);
 bool SystemProperties::imageFrameworkEnable_ = true;
+float SystemProperties::fontScale_ = 1.0f;
 float SystemProperties::pageCount_ = 0.0f;
 float SystemProperties::dragStartDampingRatio_ = 0.2f;
 float SystemProperties::dragStartPanDisThreshold_ = 10.0f;
@@ -151,6 +152,11 @@ float SystemProperties::GetFontWeightScale()
     return 1.0f;
 }
 
+float SystemProperties::GetFontScale()
+{
+    return fontScale_;
+}
+
 void SystemProperties::InitMccMnc(int32_t mcc, int32_t mnc)
 {
     mcc_ = mcc;
@@ -183,6 +189,11 @@ bool SystemProperties::IsSyscapExist(const char* cap)
 #else
     return false;
 #endif
+}
+
+bool SystemProperties::IsApiVersionGreaterOrEqual(int majorVersion, int minorVersion, int patchVersion)
+{
+    return false;
 }
 
 std::string SystemProperties::GetLanguage()
@@ -358,5 +369,15 @@ bool SystemProperties::GetContainerDeleteFlag()
 bool SystemProperties::IsPageTransitionFreeze()
 {
     return pageTransitionFrzEnabled_;
+}
+
+bool SystemProperties::GetMultiInstanceEnabled()
+{
+    return false;
+}
+
+bool SystemProperties::ConfigChangePerform()
+{
+    return false;
 }
 } // namespace OHOS::Ace
